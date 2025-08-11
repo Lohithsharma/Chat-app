@@ -2,58 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+/* Ensure root elements fill viewport for height calculations */
+/* Ensure root elements fill viewport for height calculations */
+/* Root and body to fill viewport for height calculations */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* dark mode looking scrollbar */
+body {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("https://images.hdqwalls.com/download/abstract-simple-background-4k-lp-3840x2160.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Scrollbar styles */
 ::-webkit-scrollbar {
-	width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: #555;
+  background: #555;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #121212;
-	border-radius: 5px;
+  background: #121212;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #242424;
+  background: #242424;
 }
 
-/* SHAKE ANIMATION ON HORIZONTAL DIRECTION */
+/* Shake animation */
 .shake {
-	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
-	perspective: 1000px;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 @keyframes shake {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
 
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
-	}
+/* Mobile responsiveness */
+@media (max-width: 767px) {
+  /* Full width and height container on mobile when chat open */
+  .full-width-on-mobile-when-chat-open {
+    width: 100% !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
 
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-4px, 0, 0);
-	}
+  /* Scrollable messages between back button and input */
+  .full-width-on-mobile-when-chat-open .messages-scroll-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
 
-	40%,
-	60% {
-		transform: translate3d(4px, 0, 0);
-	}
+  /* Wrap text inside messages */
+  .full-width-on-mobile-when-chat-open .messages-scroll-container * {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Sticky back button container - always visible on top */
+  .back-button-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(229 231 235 / 0.95);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Sticky message input at bottom */
+  .full-width-on-mobile-when-chat-open > .message-input-wrapper {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    background: white;
+  }
+}
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
 }
